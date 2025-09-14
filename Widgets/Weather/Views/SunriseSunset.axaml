@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:Weather.ViewModels"
+             x:Class="Weather.Views.SunriseSunset"
+             x:DataType="viewModels:ForecastViewModel"
+             Margin="6">
+    <Viewbox Stretch="Uniform" DataContext="{Binding SunsetSunrise}">
+        <Canvas Width="100" Height="100">
+            <Ellipse Width="100" Height="100" Opacity="0.2"
+                     Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+            <PathIcon Canvas.Top="20" MinWidth="100" HorizontalAlignment="Center"
+                      Width="40"
+                      Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                      Data="{Binding Icon}" />
+            <TextBlock Canvas.Top="45" MinWidth="100" TextAlignment="Center"
+                       FontSize="25" FontWeight="SemiBold" LetterSpacing="-1"
+                       Text="{Binding Time}" />
+        </Canvas>
+    </Viewbox>
+</UserControl>

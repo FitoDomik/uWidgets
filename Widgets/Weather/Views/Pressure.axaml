@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Weather.Views.Controls"
+             xmlns:viewModels="clr-namespace:Weather.ViewModels"
+             x:DataType="viewModels:ForecastViewModel"
+             x:Class="Weather.Views.Pressure"
+             Margin="0">
+    <controls:Metric DataContext="{Binding Pressure}" />
+</UserControl>
