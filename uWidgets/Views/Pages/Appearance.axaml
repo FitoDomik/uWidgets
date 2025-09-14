@@ -1,0 +1,95 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:uWidgets.Views.Controls"
+             xmlns:viewModels="clr-namespace:uWidgets.ViewModels"
+             xmlns:locales="clr-namespace:uWidgets.Locales"
+             x:Class="uWidgets.Views.Pages.Appearance"
+             x:DataType="viewModels:AppearanceViewModel">
+    <UserControl.Styles>
+        <Styles>
+            <Style Selector="ColorPicker /template/ DropDownButton">
+                <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+        </Styles>
+    </UserControl.Styles>
+    <StackPanel Orientation="Vertical" Spacing="3">
+        <TextBlock FontSize="14" FontWeight="SemiBold" Margin="0 0 0 10" 
+                   Text="{x:Static locales:Locale.Settings_Appearance_ApplyTheme}"/>
+        <ItemsControl ItemsSource="{Binding Themes}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="controls:ThemeButton">
+                    <ContentControl Content="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" MaxWidth="600" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <TextBlock FontSize="14" FontWeight="SemiBold" Margin="0 20 0 10" 
+                   Text="{x:Static locales:Locale.Settings_Appearance_Colors}"/>
+        <controls:Setting Icon="{DynamicResource Brush}" 
+            Title="{x:Static locales:Locale.Settings_Appearance_DarkMode_Title}" 
+            Subtitle="{x:Static locales:Locale.Settings_Appearance_DarkMode_Subtitle}">
+            <ComboBox ItemsSource="{Binding DarkModes}" MinWidth="130" 
+                      SelectedItem="{Binding DarkMode}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="viewModels:DarkModeViewModel">
+                        <TextBlock Text="{Binding Name}" Margin="0 4" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </controls:Setting>
+        <controls:Setting Icon="{DynamicResource Transparency}" 
+            Title="{x:Static locales:Locale.Settings_Appearance_OpacityLevel_Title}" 
+            Subtitle="{x:Static locales:Locale.Settings_Appearance_OpacityLevel_Subtitle}">
+            <NumericUpDown MinWidth="130" Minimum="0" Maximum="1" Increment="0.05" Value="{Binding OpacityLevel}" />
+        </controls:Setting>
+        <controls:Setting Icon="{DynamicResource Color}" 
+                          Title="{x:Static locales:Locale.Settings_Appearance_AccentColor_Title}">
+            <StackPanel Orientation="Horizontal" Spacing="16">
+                <ColorPicker Height="36" Width="72"
+                             IsVisible="{Binding ShowColorPalette}" 
+                             Color="{Binding AccentColor}" 
+                             IsAlphaVisible="False" IsColorComponentsVisible="False" 
+                             IsColorModelVisible="False" IsColorSpectrumSliderVisible="False" IsAccentColorsVisible="False"
+                             IsColorPreviewVisible="False" IsComponentSliderVisible="False" IsHexInputVisible="False" />
+                <ComboBox ItemsSource="{Binding AccentComboboxItems}" MinWidth="130" 
+                          SelectedItem="{Binding AccentMode}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="viewModels:AccentColorViewModel">
+                            <TextBlock Text="{Binding Name}" Margin="0 4" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </controls:Setting>
+        <controls:Setting Icon="{DynamicResource Monochrome}" 
+                          Title="{x:Static locales:Locale.Settings_Appearance_Monochrome_Title}" 
+                          Subtitle="{x:Static locales:Locale.Settings_Appearance_Monochrome_Subtitle}">
+            <ToggleSwitch IsChecked="{Binding Monochrome}" />
+        </controls:Setting>
+        <TextBlock FontSize="14" FontWeight="SemiBold" Margin="0 20 0 10"
+                   Text="{x:Static locales:Locale.Settings_Advanced_Appearance}"/>
+        <controls:Setting Icon="{DynamicResource Font}" 
+                          Title="{x:Static locales:Locale.Settings_Advanced_FontFamily_Title}" 
+                          Subtitle="{x:Static locales:Locale.Settings_Advanced_FontFamily_Subtitle}">
+            <ComboBox ItemsSource="{Binding Fonts}" MinWidth="130" 
+                      SelectedItem="{Binding Font}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Margin="0 4" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </controls:Setting>
+        <controls:Setting Icon="{DynamicResource WidgetRadius}" 
+                          Title="{x:Static locales:Locale.Settings_Advanced_UseNativeFrame_Title}" 
+                          Subtitle="{x:Static locales:Locale.Settings_Advanced_UseNativeFrame_Subtitle}">
+            <ToggleSwitch IsChecked="{Binding UseNativeFrame}" />
+        </controls:Setting>
+    </StackPanel>
+</UserControl>
